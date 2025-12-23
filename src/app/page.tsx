@@ -12,6 +12,7 @@ import {
   Layers,
   PartyPopper,
   UserRoundSearch,
+  Mic,
 } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -174,6 +175,15 @@ export default function Home() {
               placeholder="Ask me anything…"
               className="w-full border-none bg-transparent text-base text-neutral-800 placeholder:text-neutral-500 focus:outline-none dark:text-neutral-200 dark:placeholder:text-neutral-500"
             />
+
+            <button
+              type="button"
+              onClick={() => router.push('/voice')}
+              className="mr-2 flex items-center justify-center p-2 text-neutral-500 transition-colors hover:text-indigo-500"
+              title="Voice conversation mode"
+            >
+              <Mic className="h-5 w-5" />
+            </button>
             <button
               type="submit"
               disabled={!input.trim()}

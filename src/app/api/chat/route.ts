@@ -34,10 +34,14 @@ function errorHandler(error: unknown) {
 
 export async function POST(req: Request) {
   try {
-    const { messages } = await req.json();
+    const { messages, isVoiceMode } = await req.json();
     console.log('[CHAT-API] Incoming messages:', messages);
 
-    messages.unshift(SYSTEM_PROMPT);
+    const systemPromptToCheck = isVoiceMode
+      ? { ...SYSTEM_PROMPT, content: SYSTEM_PROMPT.content + '\n\nIMPORTANT: You are currently speaking via voice. Keep your responses VERY short, concise, and conversational. Limit responses to 1-2 sentences max unless asked for a long explanation. Do not use markdown formatting like bold or lists, as they are spoken.' }
+      : SYSTEM_PROMPT;
+
+    messages.unshift(systemPromptToCheck);
 
     const tools = {
       getProjects,
