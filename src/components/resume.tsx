@@ -8,13 +8,13 @@ import Image from 'next/image';
 export function Resume() {
   // Resume details
   const resumeDetails = {
-    title: "Yuvraj's Resume",
-    description: 'Data Science & AI Enthusiast',
+    title: "Kushal's Resume",
+    description: 'AI & Data Science Enthusiast',
     fileType: 'PDF',
-    lastUpdated: 'July 2025',
+    lastUpdated: 'December 2024',
     fileSize: '0.3 MB',
-    previewImageSrc: '/Resume_Yuvraj_Singh_AI.png',
-    downloadUrl: '/Resume_Yuvraj_Singh_AI.pdf',
+    previewImageSrc: '/Resume_Kushal_Jain.png',
+    downloadUrl: '/Resume_Kushal_Jain.pdf',
   };
 
   const handleDownload = () => {

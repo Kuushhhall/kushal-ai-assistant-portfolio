@@ -5,9 +5,9 @@ import { z } from "zod";
 
 export const getSports = tool({
   description:
-    "This tool will show some photos of Yuvi riding his bike",
+    "This tool will show Kushal's hobbies and creative interests like dancing, cinematography, and video editing",
   parameters: z.object({}),
   execute: async () => {
-    return "Here my some pictures of me enjoying a bike ride!";
+    return "Here's a glimpse into my creative side - dancing, cinematography, and video editing!";
   },
 });

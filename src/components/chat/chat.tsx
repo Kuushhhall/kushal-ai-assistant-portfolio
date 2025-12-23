@@ -84,7 +84,7 @@ const Avatar = dynamic<AvatarProps>(
           >
             {isIOS() ? (
               <img
-                src="/landing-memojis.png"
+                src="/landing_page_memoji.png"
                 alt="iOS avatar"
                 className="h-full w-full scale-[1.8] object-contain"
               />
@@ -113,12 +113,13 @@ const MOTION_CONFIG = {
   exit: { opacity: 0, y: 20 },
   transition: {
     duration: 0.3,
-    ease: 'easeOut',
+    ease: 'easeOut' as const,
   },
 };
 
 const Chat = () => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const submittedRef = useRef(false); // Prevent duplicate submissions
   const searchParams = useSearchParams();
   const initialQuery = searchParams.get('query');
   const [autoSubmitted, setAutoSubmitted] = useState(false);
@@ -231,7 +232,8 @@ const Chat = () => {
       videoRef.current.pause();
     }
 
-    if (initialQuery && !autoSubmitted) {
+    if (initialQuery && !autoSubmitted && !submittedRef.current) {
+      submittedRef.current = true;
       setAutoSubmitted(true);
       setInput('');
       submitQuery(initialQuery);
@@ -272,7 +274,7 @@ const Chat = () => {
     !currentAIMessage && !latestUserMessage && !loadingSubmit;
 
   // Calculate header height based on hasActiveTool
-  const headerHeight = hasActiveTool ? 100 : 180;
+  const headerHeight = hasActiveTool ? 140 : 220;
 
   return (
     <div className="relative h-screen overflow-hidden">
@@ -289,7 +291,7 @@ const Chat = () => {
             animationDuration={1.5}
             label="Star"
             size={'sm'}
-            repoUrl="https://github.com/yuvraj0412s"
+            repoUrl="https://github.com/Kuushhhall"
           />
         </div>
       </div>
@@ -374,30 +376,30 @@ const Chat = () => {
           </AnimatePresence>
         </div>
 
-{/* Fixed Bottom Bar */}
-<div
-  className="sticky bottom-0 px-2 pt-3 md:px-0 md:pb-4 transition-colors duration-300 bg-white dark:bg-black"
->
-  <div className="relative flex flex-col items-center gap-3">
-    <HelperBoost submitQuery={submitQuery} setInput={setInput} />
-    <ChatBottombar
-      input={input}
-      handleInputChange={handleInputChange}
-      handleSubmit={onSubmit}
-      isLoading={isLoading}
-      stop={handleStop}
-      isToolInProgress={isToolInProgress}
-    />
-  </div>
-</div>
+        {/* Fixed Bottom Bar */}
+        <div
+          className="sticky bottom-0 px-2 pt-3 md:px-0 md:pb-4 transition-colors duration-300 bg-white dark:bg-black"
+        >
+          <div className="relative flex flex-col items-center gap-3">
+            <HelperBoost submitQuery={submitQuery} setInput={setInput} />
+            <ChatBottombar
+              input={input}
+              handleInputChange={handleInputChange}
+              handleSubmit={onSubmit}
+              isLoading={isLoading}
+              stop={handleStop}
+              isToolInProgress={isToolInProgress}
+            />
+          </div>
+        </div>
 
         <a
-          href="https://linkedin.com/in/yuvraj-singh-77601827a"
+          href="https://linkedin.com/in/kuushhhall"
           target="_blank"
           rel="noopener noreferrer"
           className="fixed right-3 bottom-0 z-10 mb-4 hidden cursor-pointer items-center gap-2 rounded-xl px-4 py-2 text-sm hover:underline md:block"
         >
-          @yuvraj-singh
+          @kushal-jain
         </a>
       </div>
     </div>

@@ -7,13 +7,13 @@ import React from 'react';
 export function Presentation() {
   // Personal information
   const profile = {
-    name: 'Yuvraj Singh',
-    age: '22 years old',
-    location: 'Gurugram, India',
+    name: 'Kushal Jain',
+    age: '21 years old',
+    location: 'Mumbai, Maharashtra',
     // Add a newline character after the emoji
     description:
-      "Hey 👋\nI'm Yuvraj also known as Yuvi, building AI-powered experiences that talk back, think with you, and make static tech feel alive.",
-    src: '/profile-yuvi-03.jpeg',
+      "Hey 👋\nI'm Kushal (also known as Kushu), building AI-powered experiences that talk back, think with you, and make static tech feel alive. I'm a passionate dancer, cinematographer, and editor - but now completely consumed by tech and coding!",
+    src: '/profile_kushal.png',
     fallbackSrc:
       'https://images.unsplash.com/photo-1610216705422-caa3fcb6d158?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.0.3',
   };
@@ -24,7 +24,7 @@ export function Presentation() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: 'easeOut' },
+      transition: { duration: 0.6, ease: 'easeOut' as const },
     },
   };
 
@@ -36,7 +36,7 @@ export function Presentation() {
       y: 0,
       transition: {
         duration: 0.6,
-        ease: 'easeOut',
+        ease: 'easeOut' as const,
         delay: 0.2,
       },
     },
@@ -103,7 +103,7 @@ export function Presentation() {
             transition={{ delay: 0.6, duration: 0.5 }}
             className="mt-4 flex flex-wrap gap-2"
           >
-            {['AI', 'Developer', 'Sport', 'SaaS Builder'].map(
+            {['AI & ML', 'Data Science', 'Full-Stack', 'LLM Fine-tuning'].map(
               (tag) => (
                 <span
                   key={tag}

@@ -1,4 +1,4 @@
-import { mistral } from '@ai-sdk/mistral';
+import { createOpenAI } from '@ai-sdk/openai';
 import { streamText } from 'ai';
 import { SYSTEM_PROMPT } from './prompt';
 import { getContact } from './tools/getContact';
@@ -11,9 +11,14 @@ import { getSkills } from './tools/getSkills';
 import { getSports } from './tools/getSports';
 import { getWeather } from './tools/getWeather';
 
+// Create DeepSeek client (OpenAI-compatible API)
+const deepseek = createOpenAI({
+  baseURL: 'https://api.deepseek.com',
+  apiKey: process.env.DEEPSEEK_API_KEY,
+});
+
 export const maxDuration = 30;
 
-// ❌ Pas besoin de l'export ici, Next.js n'aime pas ça
 function errorHandler(error: unknown) {
   if (error == null) {
     return 'Unknown error';
@@ -47,7 +52,7 @@ export async function POST(req: Request) {
     };
 
     const result = streamText({
-      model: mistral('mistral-large-latest'),
+      model: deepseek('deepseek-chat'),
       messages,
       toolCallStreaming: true,
       tools,

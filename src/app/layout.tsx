@@ -8,55 +8,57 @@ import Script from "next/script";
 import "./globals.css";
 
 // Load Inter font for non-Apple devices
-const inter = Inter({ 
+const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
-  title: "Yuvraj Singh Portfolio",
+  title: "Kushal Jain Portfolio",
   description: "Interactive portfolio with an AI-powered Memoji that answers questions about me, my skills, and my experience",
   keywords: [
-    "Yuvraj Singh", 
-    "Portfolio", 
-    "Developer", 
-    "AI", 
-    "Interactive", 
-    "Memoji", 
+    "Kushal Jain",
+    "Portfolio",
+    "Developer",
+    "AI",
+    "Interactive",
+    "Memoji",
     "Web Development",
     "Full Stack",
+    "Data Science",
+    "Machine Learning",
     "Next.js",
     "React"
   ],
   authors: [
     {
-      name: "Yuvraj Singh",
-      url: "https://yuvraj.bio",
+      name: "Kushal Jain",
+      url: "https://kushal.bio",
     },
   ],
-  creator: "Yuvraj Singh",
+  creator: "Kushal Jain",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://yuvraj.bio",
-    title: "Yuvraj Singh Portfolio",
+    url: "https://kushal.bio",
+    title: "Kushal Jain Portfolio",
     description: "Interactive portfolio with an AI-powered Memoji that answers questions about me",
-    siteName: "Yuvraj Singh Portfolio",
+    siteName: "Kushal Jain Portfolio",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Yuvraj Singh Portfolio",
+    title: "Kushal Jain Portfolio",
     description: "Interactive portfolio with an AI-powered Memoji that answers questions about me",
-    creator: "@yuvrajsingh",
+    creator: "@kuushhhall",
   },
   icons: {
     icon: [
       {
-        url: "/logo-yuvi.svg",
+        url: "/logo-kushal.svg",
         sizes: "any",
       }
     ],
-    shortcut: "/logo-yuvi.svg?v=2",
+    shortcut: "/logo-kushal.svg?v=2",
     apple: "/apple-touch-icon.svg?v=2",
   },
 };
@@ -70,7 +72,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-        <link rel="icon" href="/logo-yuvi.svg" sizes="any" />
+        <link rel="icon" href="/logo-kushal.svg" sizes="any" />
         {/* Google Analytics */}
         <Script
           async

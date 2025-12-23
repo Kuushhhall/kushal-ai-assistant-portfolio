@@ -5,13 +5,12 @@ import {
   ChatBubbleMessage,
 } from '@/components/ui/chat/chat-bubble';
 import { ChatRequestOptions } from 'ai';
-import { Message } from 'ai/react';
 import { motion } from 'framer-motion';
 import ChatMessageContent from './chat-message-content';
 import ToolRenderer from './tool-renderer';
 
 interface SimplifiedChatViewProps {
-  message: Message;
+  message: any; // Using any for SDK version compatibility
   isLoading: boolean;
   reload: (
     chatRequestOptions?: ChatRequestOptions
@@ -25,7 +24,7 @@ const MOTION_CONFIG = {
   exit: { opacity: 0, y: 20 },
   transition: {
     duration: 0.3,
-    ease: 'easeOut',
+    ease: 'easeOut' as const,
   },
 };
 
@@ -41,11 +40,11 @@ export function SimplifiedChatView({
   const toolInvocations =
     message.parts
       ?.filter(
-        (part) =>
+        (part: any) =>
           part.type === 'tool-invocation' &&
           part.toolInvocation?.state === 'result'
       )
-      .map((part) =>
+      .map((part: any) =>
         part.type === 'tool-invocation' ? part.toolInvocation : null
       )
       .filter(Boolean) || [];

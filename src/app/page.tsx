@@ -23,7 +23,7 @@ const questions = {
   Me: 'Who are you? I want to know more about you.',
   Projects: 'What are your projects? What are you working on right now?',
   Skills: 'What are your skills? Give me a list of your soft and hard skills.',
-  Fun: 'What’s the craziest thing you’ve ever done? What are your hobbies?',
+  Fun: "What's the craziest thing you've ever done? What are your hobbies?",
   Contact: 'How can I contact you?',
 } as const;
 
@@ -50,7 +50,7 @@ export default function Home() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { type: 'ease', duration: 0.8 },
+      transition: { type: 'tween' as const, duration: 0.8 },
     },
   };
   const bottomElementVariants = {
@@ -58,14 +58,14 @@ export default function Home() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { type: 'ease', duration: 0.8, delay: 0.2 },
+      transition: { type: 'tween' as const, duration: 0.8, delay: 0.2 },
     },
   };
 
   useEffect(() => {
     // Précharger les assets du chat en arrière-plan
     const img = new window.Image();
-    img.src = '/landing-memojis.png';
+    img.src = '/landing_page_memoji.png';
 
     // Précharger les vidéos aussi
     const linkWebm = document.createElement('link');
@@ -89,7 +89,7 @@ export default function Home() {
           className="hidden bg-gradient-to-b from-neutral-500/10 to-neutral-500/0 bg-clip-text text-[10rem] leading-none font-black text-transparent select-none sm:block lg:text-[16rem]"
           style={{ marginBottom: '-2.5rem' }}
         >
-          Yuvraj
+          Kushal
         </div>
       </div>
 
@@ -101,7 +101,7 @@ export default function Home() {
           animationDuration={1.5}
           label="Star"
           size={'sm'}
-          repoUrl="https://github.com/yuvraj0412s/ai-native_portfolio.git"
+          repoUrl="https://github.com/Kuushhhall/ai-native-portfolio"
         />
       </div>
 
@@ -131,7 +131,7 @@ export default function Home() {
         </div>
 
         <h2 className="text-secondary-foreground mt-1 text-xl font-semibold md:text-2xl">
-          Hey, I'm Yuvraj Singh 👋
+          Hey, I'm Kushal Jain 👋
         </h2>
         <h1 className="text-4xl font-bold sm:text-5xl md:text-6xl lg:text-7xl">
           AI Portfolio
@@ -141,7 +141,7 @@ export default function Home() {
       {/* centre memoji */}
       <div className="relative z-10 h-52 w-48 overflow-hidden sm:h-72 sm:w-72">
         <Image
-          src="/landing-memojis.png"
+          src="/landing_page_memoji.png"
           alt="Hero memoji"
           width={2000}
           height={2000}
@@ -180,7 +180,7 @@ export default function Home() {
               aria-label="Submit question"
               className="flex items-center justify-center rounded-full bg-[#0171E3] p-2.5 text-white transition-colors hover:bg-blue-600 disabled:opacity-70 dark:bg-blue-600 dark:hover:bg-blue-700"
             >
-              <ArrowRight  className="h-5 w-5" />
+              <ArrowRight className="h-5 w-5" />
             </button>
           </div>
         </form>

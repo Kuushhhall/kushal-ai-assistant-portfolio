@@ -31,13 +31,13 @@ export default function WelcomeModal({ trigger }: WelcomeModalProps) {
       onClick={() => setIsOpen(true)}
     >
       <Image
-        src="/logo-yuvi.svg"
+        src="/logo-kushal.svg"
         width={100}
         height={100}
         alt="Logo"
         className="w-6 md:w-8"
       />
-      <span className="sr-only">About Yuvi</span>
+      <span className="sr-only">About Kushal</span>
     </Button>
   );
 
@@ -69,7 +69,7 @@ export default function WelcomeModal({ trigger }: WelcomeModalProps) {
             <DialogHeader className="relative flex flex-row items-start justify-between px-8 pt-8 pb-6">
               <div>
                 <DialogTitle className="flex items-center gap-2 text-4xl font-bold tracking-tight">
-                  Welcome to Yuvraj's AI Portfolio
+                  Welcome to Kushal's AI Portfolio
                 </DialogTitle>
                 <DialogDescription className="mt-2 text-base">
                   {/*My interactive AI portfolio experience*/}
@@ -92,7 +92,7 @@ export default function WelcomeModal({ trigger }: WelcomeModalProps) {
                 {/* What section */}
                 <div className="space-y-3">
                   <h3 className="text-primary flex items-center gap-2 text-xl font-semibold">
-                    What's ????
+                    What's this? 🤔
                   </h3>
                   <p className="text-accent-foreground text-base leading-relaxed">
                     I'm so excited to present my{' '}
@@ -105,7 +105,7 @@ export default function WelcomeModal({ trigger }: WelcomeModalProps) {
                 {/* Why section */}
                 <div className="space-y-3">
                   <h3 className="text-primary flex items-center gap-2 text-xl font-semibold">
-                    Why ???
+                    Why? 🚀
                   </h3>
                   <p className="text-accent-foreground text-base leading-relaxed">
                     Traditional portfolios can be limiting. <br /> They can't
@@ -135,8 +135,8 @@ export default function WelcomeModal({ trigger }: WelcomeModalProps) {
                 <p className="text-muted-foreground">
                   If you love it, please share it! Feedback is always welcome.
                 </p>
-                <div className="flex cursor-pointer items-center text-blue-500 hover:underline" 
-                onClick={handleContactMe}>
+                <div className="flex cursor-pointer items-center text-blue-500 hover:underline"
+                  onClick={handleContactMe}>
                   Contact me.
                 </div>
               </div>

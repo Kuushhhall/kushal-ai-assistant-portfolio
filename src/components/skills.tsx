@@ -3,66 +3,89 @@
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { motion } from 'framer-motion';
-import { Code, Cpu, PenTool, Users } from 'lucide-react';
+import { Code, Cpu, PenTool, Users, Database, Cloud } from 'lucide-react';
 
 const Skills = () => {
   const skillsData = [
     {
-      category: 'Languages & Web Development',
+      category: 'Languages',
       icon: <Code className="h-5 w-5" />,
       skills: [
         'Python',
         'C++',
+        'C',
         'SQL',
-        'JavaScript/TypeScript',
-        'React',
-        'Next.js',
-        'Node.js',
-        'HTML/CSS',
-        'Tailwind CSS',
-        'Bootstrap',
-        'Flask',
-        'Django',
+        'JavaScript',
       ],
       color: 'bg-blue-50 text-blue-600 border border-blue-200',
     },
     {
-      category: 'Data Science & AI',
+      category: 'ML & AI',
       icon: <Cpu className="h-5 w-5" />,
+      skills: [
+        'PyTorch',
+        'TensorFlow',
+        'scikit-learn',
+        'OpenCV',
+        'YOLO',
+        'Transformers',
+        'LangChain',
+        'RAG',
+        'LLM Fine-tuning',
+      ],
+      color: 'bg-emerald-50 text-emerald-600 border border-emerald-200',
+    },
+    {
+      category: 'Data Science',
+      icon: <Database className="h-5 w-5" />,
       skills: [
         'Pandas',
         'NumPy',
-        'Scikit-learn',
-        'PyTorch',
-        'Keras',
-        'OpenAI API',
-        'Hugging Face Transformers',
-        'LangChain',
-        'Streamlit',
-        'Plotly',
         'Matplotlib',
         'Seaborn',
-        'TensorFlow',
-        'Machine Learning',
-        'AI Agents',
-        'Prompt engineering',
-        'Vercel AI SDK',
-        'Power BI',
-        'Tableau',
-        'Dash',
+        'Hypothesis Testing',
+        'A/B Testing',
+        'EDA',
+        'Feature Engineering',
       ],
-      color: 'bg-emerald-50 text-emerald-600 border border-emerald-200',
+      color: 'bg-purple-50 text-purple-600 border border-purple-200',
+    },
+    {
+      category: 'Backend & DevOps',
+      icon: <Cloud className="h-5 w-5" />,
+      skills: [
+        'Flask',
+        'FastAPI',
+        'Docker',
+        'Kubernetes',
+        'Git',
+        'CI/CD',
+        'REST APIs',
+      ],
+      color: 'bg-orange-50 text-orange-600 border border-orange-200',
+    },
+    {
+      category: 'Databases',
+      icon: <Database className="h-5 w-5" />,
+      skills: [
+        'MySQL',
+        'MongoDB',
+        'Neo4j',
+        'Hadoop',
+        'Query Optimization',
+      ],
+      color: 'bg-red-50 text-red-600 border border-red-200',
     },
     {
       category: 'Tools & Platforms',
       icon: <PenTool className="h-5 w-5" />,
       skills: [
-        'Git',
-        'GitHub', 
-        'VS Code', 
-        'Jupyter Notebook',
-        'Docker',
-        'Discord',
+        'Power BI',
+        'Tableau',
+        'Jupyter',
+        'GCP',
+        'AWS',
+        'Grafana',
       ],
       color: 'bg-indigo-50 text-indigo-600 border border-indigo-200',
     },
@@ -97,7 +120,7 @@ const Skills = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: [0.19, 1, 0.22, 1] },
+      transition: { duration: 0.5, ease: [0.19, 1, 0.22, 1] as [number, number, number, number] },
     },
   };
 
@@ -106,7 +129,7 @@ const Skills = () => {
     visible: {
       opacity: 1,
       scale: 1,
-      transition: { duration: 0.3, ease: 'easeOut' },
+      transition: { duration: 0.3, ease: 'easeOut' as const },
     },
   };
 
@@ -114,7 +137,7 @@ const Skills = () => {
     <motion.div
       initial={{ scale: 0.98, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
-      transition={{ duration: 0.6, ease: [0.19, 1, 0.22, 1] }}
+      transition={{ duration: 0.6, ease: [0.19, 1, 0.22, 1] as [number, number, number, number] }}
       className="mx-auto w-full max-w-5xl rounded-4xl"
     >
       <Card className="w-full border-none bg-transparent px-0 pb-12 text-black shadow-none dark:text-white">
