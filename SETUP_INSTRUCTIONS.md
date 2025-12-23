@@ -1,4 +1,4 @@
-# 🚀 Portfolio Setup Instructions for Yuvraj
+# 🚀 Portfolio Setup Instructions
 
 ## 📋 **Step 1: Install Dependencies**
 
@@ -43,18 +43,18 @@ Visit `http://localhost:3000` to test your portfolio.
    - Add environment variable: `MISTRAL_API_KEY` with your API key
 3. **Deploy!**
 
-## ✅ **What's Been Updated:**
+## ✅ **What's Included:**
 
-- ✅ **Personal Information**: Yuvraj Singh, 22, Gurugram
+- ✅ **Personal Information**: Customizable portfolio information
 - ✅ **Contact Details**: Email, phone, LinkedIn, GitHub, Instagram
-- ✅ **AI Personality**: Customized with your background and experience
-- ✅ **API Integration**: Switched from OpenAI to Mistral AI
-- ✅ **Professional Experience**: All your internships and projects
+- ✅ **AI Personality**: Customizable AI assistant
+- ✅ **API Integration**: Mistral AI integration
+- ✅ **Professional Experience**: Portfolio projects and experience
 - ✅ **Skills**: Data science, AI, machine learning focus
 
 ## 🎨 **Next Steps:**
 
-1. **Add your projects** (I'll help you with this)
+1. **Add your projects** (Update the projects data)
 2. **Customize colors** (if desired)
 3. **Add your own logo** (when ready)
 4. **Test the AI chat** functionality
