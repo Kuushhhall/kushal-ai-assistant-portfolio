@@ -1,18 +1,15 @@
 'use client';
 
-import type { UIMessage } from 'ai';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from '@/components/ui/collapsible';
-import { ChevronDown, ChevronUp } from 'lucide-react';
-import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+import { Copy } from 'lucide-react';
+import * as React from 'react';
+import { toast } from 'sonner';
 
 export type ChatMessageContentProps = {
-  message: any; // Using any for SDK version compatibility
+  message: unknown; // SDK version compatibility
   isLast?: boolean;
   isLoading?: boolean;
   reload?: () => Promise<string | null | undefined>;
@@ -20,113 +17,130 @@ export type ChatMessageContentProps = {
   skipToolRendering?: boolean;
 };
 
-const CodeBlock = ({ content }: { content: string }) => {
-  const [isOpen, setIsOpen] = useState(true);
+type TextPart = { type: 'text'; text: string };
 
-  // Extract language if present in the first line
-  const firstLineBreak = content.indexOf('\n');
-  const firstLine = content.substring(0, firstLineBreak).trim();
-  const language = firstLine || 'text';
-  const code = firstLine ? content.substring(firstLineBreak + 1) : content;
+function isTextPart(part: unknown): part is TextPart {
+  if (part == null || typeof part !== 'object') return false;
+  const p = part as { type?: unknown; text?: unknown };
+  return p.type === 'text' && typeof p.text === 'string';
+}
 
-  // Get first few lines for preview
-  const previewLines = code.split('\n').slice(0, 1).join('\n');
-  const hasMoreLines = code.split('\n').length > 1;
+function CodeBlock({
+  code,
+  language,
+}: {
+  code: string;
+  language?: string;
+}) {
+  const [copied, setCopied] = React.useState(false);
+
+  const onCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopied(true);
+      toast.success('Copied');
+      window.setTimeout(() => setCopied(false), 1200);
+    } catch {
+      toast.error('Copy failed');
+    }
+  };
 
   return (
-    <Collapsible
-      open={isOpen}
-      onOpenChange={setIsOpen}
-      className="my-4 w-full overflow-hidden rounded-md"
-    >
-      <div className="bg-secondary text-secondary-foreground flex items-center justify-between rounded-t-md border-b px-4 py-1">
-        <span className="text-xs">
-          {language !== 'text' ? language : 'Code'}
-        </span>
-        <CollapsibleTrigger className="hover:bg-secondary/80 rounded p-1">
-          {isOpen ? (
-            <ChevronUp className="h-4 w-4" />
-          ) : (
-            <ChevronDown className="h-4 w-4" />
-          )}
-        </CollapsibleTrigger>
+    <div className="my-4 w-full overflow-hidden rounded-xl border bg-card shadow-sm">
+      <div className="flex items-center justify-between gap-3 border-b px-3 py-2">
+        <div className="text-muted-foreground min-w-0 text-xs">
+          {language ? language : 'code'}
+        </div>
+        <Button
+          type="button"
+          variant="ghost"
+          size="sm"
+          onClick={onCopy}
+          className="h-7 px-2"
+        >
+          <Copy className="size-4" />
+          {copied ? 'Copied' : 'Copy'}
+        </Button>
       </div>
-
-      <div className="bg-accent/80 text-accent-foreground rounded-b-md">
-        {!isOpen && hasMoreLines ? (
-          <pre className="px-4 py-3">
-            <code className="text-sm">{previewLines + '\n...'}</code>
-          </pre>
-        ) : (
-          <CollapsibleContent>
-            <div className="custom-scrollbar" style={{ overflowX: 'auto' }}>
-              <pre className="min-w-max px-4 py-3">
-                <code className="text-sm whitespace-pre">{code}</code>
-              </pre>
-            </div>
-          </CollapsibleContent>
-        )}
-      </div>
-    </Collapsible>
+      <pre className="custom-scrollbar overflow-x-auto px-4 py-3 text-sm leading-relaxed">
+        <code className="whitespace-pre">{code}</code>
+      </pre>
+    </div>
   );
-};
+}
 
 export default function ChatMessageContent({
   message,
 }: ChatMessageContentProps) {
-  // Only handle text parts
-  const renderContent = () => {
-    return message.parts?.map((part: any, partIndex: number) => {
-      if (part.type !== 'text' || !part.text) return null;
+  const maybeParts = (message as { parts?: unknown })?.parts;
+  const parts: unknown[] = Array.isArray(maybeParts) ? maybeParts : [];
 
-      // Split content by code block markers
-      const contentParts: string[] = part.text.split('```');
+  return (
+    <div className="w-full">
+      {parts.map((part, partIndex: number) => {
+        if (!isTextPart(part) || !part.text) return null;
 
-      return (
-        <div key={partIndex} className="w-full space-y-4">
-          {contentParts.map((content: string, i: number) =>
-            i % 2 === 0 ? (
-              // Regular text content
-              <div key={`text-${i}`} className="prose dark:prose-invert w-full">
-                <Markdown
-                  remarkPlugins={[remarkGfm]}
-                  components={{
-                    p: ({ children }) => (
-                      <p className="break-words whitespace-pre-wrap">
-                        {children}
-                      </p>
-                    ),
-                    ul: ({ children }) => (
-                      <ul className="my-4 list-disc pl-6">{children}</ul>
-                    ),
-                    ol: ({ children }) => (
-                      <ol className="my-4 list-decimal pl-6">{children}</ol>
-                    ),
-                    li: ({ children }) => <li className="my-1">{children}</li>,
-                    a: ({ href, children }) => (
-                      <a
-                        href={href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-500 hover:underline"
+        return (
+          <div key={partIndex} className="prose dark:prose-invert w-full">
+            <Markdown
+              remarkPlugins={[remarkGfm]}
+              components={{
+                p: ({ children }) => (
+                  <p className="break-words whitespace-pre-wrap">{children}</p>
+                ),
+                ul: ({ children }) => (
+                  <ul className="my-4 list-disc pl-6">{children}</ul>
+                ),
+                ol: ({ children }) => (
+                  <ol className="my-4 list-decimal pl-6">{children}</ol>
+                ),
+                li: ({ children }) => <li className="my-1">{children}</li>,
+                a: ({ href, children }) => (
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary underline-offset-4 hover:underline"
+                  >
+                    {children}
+                  </a>
+                ),
+                code: ({ className, children, ...props }) => {
+                  const raw = String(children ?? '');
+                  const match = /language-(\w+)/.exec(className ?? '');
+                  const language = match?.[1];
+
+                  // Inline code
+                  if (!className) {
+                    return (
+                      <code
+                        className={cn(
+                          'bg-muted rounded-md px-1 py-0.5 font-mono text-[0.875em]',
+                          'text-foreground'
+                        )}
+                        {...props}
                       >
-                        {children}
-                      </a>
-                    ),
-                  }}
-                >
-                  {content}
-                </Markdown>
-              </div>
-            ) : (
-              // Code block content
-              <CodeBlock key={`code-${i}`} content={content} />
-            )
-          )}
-        </div>
-      );
-    });
-  };
+                        {raw}
+                      </code>
+                    );
+                  }
 
-  return <div className="w-full">{renderContent()}</div>;
+                  // Block code (fenced)
+                  return (
+                    <CodeBlock
+                      code={raw.replace(/\n$/, '')}
+                      language={language}
+                    />
+                  );
+                },
+                pre: ({ children }) => <>{children}</>,
+              }}
+            >
+              {part.text}
+            </Markdown>
+          </div>
+        );
+      })}
+    </div>
+  );
 }

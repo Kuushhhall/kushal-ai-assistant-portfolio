@@ -3,7 +3,7 @@
 
 import { ChatRequestOptions } from 'ai';
 import { motion } from 'framer-motion';
-import { ArrowRight, ArrowUp } from 'lucide-react';
+import { ArrowUp, Square } from 'lucide-react';
 import React, { useEffect } from 'react';
 
 
@@ -69,17 +69,20 @@ export default function ChatBottombar({
           />
 
           <button
-            type="submit"
-            disabled={isLoading || !input.trim() || isToolInProgress}
+            type={isLoading ? 'button' : 'submit'}
+            disabled={isToolInProgress || (!isLoading && !input.trim())}
             className="flex items-center justify-center rounded-full bg-[#0171E3] p-2 text-white disabled:opacity-50"
             onClick={(e) => {
-              if (isLoading) {
-                e.preventDefault();
-                stop();
-              }
+              if (!isLoading) return;
+              e.preventDefault();
+              stop();
             }}
           >
-            <ArrowUp className="h-6 w-6" />
+            {isLoading ? (
+              <Square className="h-5 w-5" />
+            ) : (
+              <ArrowUp className="h-6 w-6" />
+            )}
           </button>
         </div>
       </form>

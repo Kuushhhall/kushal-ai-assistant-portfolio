@@ -127,12 +127,12 @@ export default function Home() {
         initial="hidden"
         animate="visible"
       >
-        <div className="z-100">
+        <div className="z-[100]">
           <WelcomeModal />
         </div>
 
         <h2 className="text-secondary-foreground mt-1 text-xl font-semibold md:text-2xl">
-          Hey, I'm Kushal Jain 👋
+          Hey, I&apos;m Kushal Jain 👋
         </h2>
         <h1 className="text-4xl font-bold sm:text-5xl md:text-6xl lg:text-7xl">
           AI Portfolio

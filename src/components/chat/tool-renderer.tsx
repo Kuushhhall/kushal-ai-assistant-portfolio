@@ -8,19 +8,24 @@ import Resume from '../resume';
 import Skills from '../skills';
 import Sports from '../sport';
 
+type ToolInvocation = {
+  toolCallId?: string;
+  toolName?: string;
+  result?: unknown;
+};
+
 interface ToolRendererProps {
-  toolInvocations: any[];
-  messageId: string;
+  toolInvocations: ToolInvocation[];
 }
 
 export default function ToolRenderer({
   toolInvocations,
-  messageId,
 }: ToolRendererProps) {
   return (
     <div className="w-full transition-all duration-300">
       {toolInvocations.map((tool) => {
-        const { toolCallId, toolName } = tool;
+        const toolCallId = tool.toolCallId ?? tool.toolName ?? 'tool';
+        const toolName = tool.toolName ?? 'tool';
 
         // Return specialized components based on tool name
         switch (toolName) {

@@ -1,67 +1,41 @@
-# 🚀 Portfolio Setup Instructions
+# Portfolio Setup Instructions
 
-## 📋 **Step 1: Install Dependencies**
-
-Run this command in your terminal:
+## Step 1: Install Dependencies
 
 ```bash
-pnpm install
+npm install
 ```
 
-This will install the Mistral AI SDK and other dependencies.
+## Step 2: Set Up Environment Variables
 
-## 🔐 **Step 2: Set Up Environment Variables**
-
-Create a file called `.env.local` in your project root with this content:
+Create a file called `.env.local` in your project root:
 
 ```env
-# Mistral AI API Configuration
-MISTRAL_API_KEY=your_actual_mistral_api_key_here
+# DeepSeek (OpenAI-compatible) API key used by /api/chat
+DEEPSEEK_API_KEY=your_deepseek_api_key_here
 
-# Environment
-NODE_ENV=development
+# Optional: used by some UI/actions
+GITHUB_TOKEN=
+
+# Optional: voice features
+ELEVENLABS_API_KEY=
+ELEVENLABS_VOICE_ID=
 ```
 
-**Replace `your_actual_mistral_api_key_here` with your real Mistral API key.**
-
-## 🎯 **Step 3: Test Locally**
-
-Run the development server:
+## Step 3: Run Locally
 
 ```bash
-pnpm dev
+npm run dev
 ```
 
-Visit `http://localhost:3000` to test your portfolio.
+Visit `http://localhost:3000`.
 
-## 🚀 **Step 4: Deploy to Vercel**
+## Step 4: Deploy (Vercel)
 
-1. **Push to GitHub** (if not already done)
-2. **Connect to Vercel**:
-   - Go to [vercel.com](https://vercel.com)
-   - Import your GitHub repository
-   - Add environment variable: `MISTRAL_API_KEY` with your API key
-3. **Deploy!**
+- Add `DEEPSEEK_API_KEY` as an environment variable in Vercel.
+- Deploy as a standard Next.js app.
 
-## ✅ **What's Included:**
+## Troubleshooting
 
-- ✅ **Personal Information**: Customizable portfolio information
-- ✅ **Contact Details**: Email, phone, LinkedIn, GitHub, Instagram
-- ✅ **AI Personality**: Customizable AI assistant
-- ✅ **API Integration**: Mistral AI integration
-- ✅ **Professional Experience**: Portfolio projects and experience
-- ✅ **Skills**: Data science, AI, machine learning focus
-
-## 🎨 **Next Steps:**
-
-1. **Add your projects** (Update the projects data)
-2. **Customize colors** (if desired)
-3. **Add your own logo** (when ready)
-4. **Test the AI chat** functionality
-
-## 🔧 **Troubleshooting:**
-
-If you see linter errors about missing modules:
-1. Make sure you ran `pnpm install`
-2. Restart your development server
-3. The errors should disappear after installation
+- Missing modules: rerun `npm install` then restart `npm run dev`.
+- Chat errors: confirm `DEEPSEEK_API_KEY` is set and the server console shows `/api/chat` requests.

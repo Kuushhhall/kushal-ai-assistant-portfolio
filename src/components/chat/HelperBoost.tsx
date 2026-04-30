@@ -6,7 +6,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@radix-ui/react-tooltip';
+} from '@/components/ui/tooltip';
 import { motion } from 'framer-motion';
 import {
   BriefcaseBusiness,
@@ -30,7 +30,6 @@ import { Drawer } from 'vaul';
 
 interface HelperBoostProps {
   submitQuery?: (query: string) => void;
-  setInput?: (value: string) => void;
 }
 
 const questions = {
@@ -145,7 +144,6 @@ const AnimatedChevron = () => {
 
 export default function HelperBoost({
   submitQuery,
-  setInput,
 }: HelperBoostProps) {
   const [isVisible, setIsVisible] = useState(true);
   const [open, setOpen] = useState(false);
@@ -201,21 +199,20 @@ export default function HelperBoost({
           {isVisible && (
             <div className="w-full">
               <div
-                className="flex w-full flex-wrap gap-1 md:gap-3"
-                style={{ justifyContent: 'safe center' }}
+                className="flex w-full flex-wrap justify-center gap-1 md:gap-3"
               >
                 {questionConfig.map(({ key, color, icon: Icon }) => (
-                <Button
-                  key={key}
-                  onClick={() => handleQuestionClick(key)}
-                  variant="outline"
-                  className="border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 h-auto min-w-[100px] flex-shrink-0 cursor-pointer rounded-xl bg-white/80 dark:bg-gray-800/80 px-4 py-3 shadow-none backdrop-blur-sm transition-none active:scale-95"
-                >
-                  <div className="flex items-center gap-3 text-gray-900 dark:text-gray-100">
-                    <Icon size={18} strokeWidth={2} color={color} />
-                    <span className="text-sm font-medium">{key}</span>
-                  </div>
-                </Button>
+                  <Button
+                    key={key}
+                    onClick={() => handleQuestionClick(key)}
+                    variant="outline"
+                    className="h-auto min-w-[100px] flex-shrink-0 cursor-pointer rounded-xl border border-gray-300 bg-white/80 px-4 py-3 shadow-none backdrop-blur-sm transition-none active:scale-95 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800/80 dark:hover:bg-gray-700"
+                  >
+                    <div className="flex items-center gap-3 text-gray-900 dark:text-gray-100">
+                      <Icon size={18} strokeWidth={2} color={color} />
+                      <span className="text-sm font-medium">{key}</span>
+                    </div>
+                  </Button>
                 ))}
 
                 {/* Need Inspiration Button */}
@@ -223,19 +220,18 @@ export default function HelperBoost({
                   <Tooltip delayDuration={0}>
                     <TooltipTrigger asChild>
                       <Drawer.Trigger className="group relative flex flex-shrink-0 items-center justify-center">
-                      <motion.div
-                        className="hover:bg-gray-100 dark:hover:bg-gray-700 flex h-auto cursor-pointer items-center space-x-1 rounded-xl border border-gray-300 dark:border-gray-700 bg-white/80 dark:bg-gray-800/80 px-4 py-3 text-sm backdrop-blur-sm transition-all duration-200"
-                        whileHover={{ scale: 1 }}
-                        whileTap={{ scale: 0.98 }}
-                      >
-                        <div className="flex items-center gap-3 text-gray-900 dark:text-gray-100">
-                          <CircleEllipsis
-                            className="h-[20px] w-[18px] text-primary dark:text-primary-light" // or use suitable text colors here
-                            strokeWidth={2}
-                          />
-                          {/* <span className="text-sm font-medium">More</span> */}
-                        </div>
-                      </motion.div>
+                        <motion.div
+                          className="flex h-auto cursor-pointer items-center space-x-1 rounded-xl border border-gray-300 bg-white/80 px-4 py-3 text-sm backdrop-blur-sm transition-all duration-200 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800/80 dark:hover:bg-gray-700"
+                          whileHover={{ scale: 1 }}
+                          whileTap={{ scale: 0.98 }}
+                        >
+                          <div className="flex items-center gap-3 text-gray-900 dark:text-gray-100">
+                            <CircleEllipsis
+                              className="h-[20px] w-[18px] text-primary"
+                              strokeWidth={2}
+                            />
+                          </div>
+                        </motion.div>
                       </Drawer.Trigger>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -250,9 +246,9 @@ export default function HelperBoost({
 
         {/* Drawer Content */}
         <Drawer.Portal>
-          <Drawer.Overlay className="fixed inset-0 z-100 bg-black/60 backdrop-blur-xs" />
+          <Drawer.Overlay className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm" />
 
-          <Drawer.Content className="fixed right-0 bottom-0 left-0 z-100 mt-24 flex h-[80%] flex-col rounded-t-[10px] bg-background outline-none lg:h-[60%]">
+          <Drawer.Content className="fixed right-0 bottom-0 left-0 z-[100] mt-24 flex h-[80%] flex-col rounded-t-[10px] bg-background outline-none lg:h-[60%]">
             <div className="flex-1 overflow-y-auto rounded-t-[10px] bg-card p-4">
               <div className="mx-auto max-w-md space-y-4">
                 <div

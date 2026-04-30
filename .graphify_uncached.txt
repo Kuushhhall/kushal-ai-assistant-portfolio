@@ -1,0 +1,9 @@
+C:\Users\kushal\Downloads\kushal-ai-assistant-portfolio\folder_structure.txt
+C:\Users\kushal\Downloads\kushal-ai-assistant-portfolio\README.md
+C:\Users\kushal\Downloads\kushal-ai-assistant-portfolio\SETUP_INSTRUCTIONS.md
+C:\Users\kushal\Downloads\kushal-ai-assistant-portfolio\public\Resume_Kushal_Jain.pdf
+C:\Users\kushal\Downloads\kushal-ai-assistant-portfolio\assets\readme-photo.png
+C:\Users\kushal\Downloads\kushal-ai-assistant-portfolio\public\landing_page_memoji.png
+C:\Users\kushal\Downloads\kushal-ai-assistant-portfolio\public\logo-kushal.svg
+C:\Users\kushal\Downloads\kushal-ai-assistant-portfolio\public\profile_kushal.png
+C:\Users\kushal\Downloads\kushal-ai-assistant-portfolio\public\readme-banner.png

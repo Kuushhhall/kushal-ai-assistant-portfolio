@@ -10,7 +10,7 @@ import ChatMessageContent from './chat-message-content';
 import ToolRenderer from './tool-renderer';
 
 interface SimplifiedChatViewProps {
-  message: any; // Using any for SDK version compatibility
+  message: unknown; // SDK version compatibility
   isLoading: boolean;
   reload: (
     chatRequestOptions?: ChatRequestOptions
@@ -34,40 +34,40 @@ export function SimplifiedChatView({
   reload,
   addToolResult,
 }: SimplifiedChatViewProps) {
-  if (message.role !== 'assistant') return null;
+  const m = message as { role?: unknown; parts?: unknown; content?: unknown; id?: unknown };
+  if (m.role !== 'assistant') return null;
+
+  type ToolInvocationPart = {
+    type: 'tool-invocation';
+    toolInvocation?: { state?: string; toolName?: string; toolCallId?: string; result?: unknown };
+  };
+
+  const isToolInvocationPart = (part: unknown): part is ToolInvocationPart => {
+    if (part == null || typeof part !== 'object') return false;
+    return (part as { type?: unknown }).type === 'tool-invocation';
+  };
 
   // Extract tool invocations that are in "result" state
   const toolInvocations =
-    message.parts
-      ?.filter(
-        (part: any) =>
-          part.type === 'tool-invocation' &&
-          part.toolInvocation?.state === 'result'
-      )
-      .map((part: any) =>
-        part.type === 'tool-invocation' ? part.toolInvocation : null
-      )
-      .filter(Boolean) || [];
+    (Array.isArray(m.parts) ? m.parts : [])
+      .filter(isToolInvocationPart)
+      .map((part) => part.toolInvocation)
+      .filter((ti): ti is NonNullable<typeof ti> => Boolean(ti))
+      .filter((ti) => ti.state === 'result');
 
   // Only display the first tool (if any)
   const currentTool = toolInvocations.length > 0 ? [toolInvocations[0]] : [];
 
-  const hasTextContent = message.content.trim().length > 0;
+  const text = typeof m.content === 'string' ? m.content : '';
+  const hasTextContent = text.trim().length > 0;
   const hasTools = currentTool.length > 0;
-
-  console.log('currentTool', currentTool);
 
   return (
     <motion.div {...MOTION_CONFIG} className="flex h-full w-full flex-col px-4">
-      {/* Single scrollable container for both tool and text content */}
-      <div className="custom-scrollbar flex h-full w-full flex-col overflow-y-auto">
-        {/* Tool invocation result - displayed at the top */}
+      <div className="flex w-full flex-col">
         {hasTools && (
           <div className="mb-4 w-full">
-            <ToolRenderer
-              toolInvocations={currentTool}
-              messageId={message.id || 'current-msg'}
-            />
+            <ToolRenderer toolInvocations={currentTool} />
           </div>
         )}
 
@@ -77,7 +77,7 @@ export function SimplifiedChatView({
             <ChatBubble variant="received" className="w-full">
               <ChatBubbleMessage className="w-full">
                 <ChatMessageContent
-                  message={message}
+                  message={m}
                   isLast={true}
                   isLoading={isLoading}
                   reload={reload}
@@ -88,9 +88,6 @@ export function SimplifiedChatView({
             </ChatBubble>
           </div>
         )}
-
-        {/* Add some padding at the bottom for better scrolling experience */}
-        <div className="pb-4"></div>
       </div>
     </motion.div>
   );

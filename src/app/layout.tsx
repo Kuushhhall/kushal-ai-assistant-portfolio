@@ -1,17 +1,10 @@
 import { Analytics } from "@vercel/analytics/react"
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import Script from "next/script";
 import "./globals.css";
-
-// Load Inter font for non-Apple devices
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-});
 
 export const metadata: Metadata = {
   title: "Kushal Jain Portfolio",
@@ -96,7 +89,6 @@ export default function RootLayout({
         className={cn(
           // "min-h-screen bg-background font-sans antialiased",
           "min-h-screen bg-white text-black dark:bg-black dark:text-white font-sans antialiased transition-colors duration-500 ease-in-out",
-          inter.variable,
         )}
       >
         <ThemeProvider

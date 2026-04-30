@@ -7,16 +7,16 @@ import MessageLoading from "./message-loading";
 
 // ChatBubble
 const chatBubbleVariant = cva(
-  "flex gap-2 items-start relative group",
+  "flex w-full items-start gap-2 relative group",
   {
     variants: {
       variant: {
-        received: "self-start w-full",
-        sent: "self-center flex-row-reverse mx-auto",
+        received: "justify-start",
+        sent: "justify-end",
       },
       layout: {
         default: "",
-        ai: "max-w-full w-full items-center",
+        ai: "w-full items-start",
       },
     },
     defaultVariants: {
@@ -86,12 +86,12 @@ const chatBubbleMessageVariants = cva("", {
   variants: {
     variant: {
       received:
-        "text-secondary-foreground rounded-lg py-2",
-      sent: "p-2 px-5 bg-[#007AFF] text-primary-foreground rounded-3xl",
+        "w-fit max-w-[92%] rounded-2xl border bg-card px-5 py-3 text-foreground shadow-sm",
+      sent: "w-fit max-w-[92%] rounded-2xl bg-[#007AFF] px-5 py-3 text-white shadow-sm",
     },
     layout: {
       default: "",
-      ai: "border-t w-full rounded-none bg-transparent",
+      ai: "w-full rounded-none border-t bg-transparent",
     },
   },
   defaultVariants: {

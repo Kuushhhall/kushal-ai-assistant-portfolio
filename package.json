@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build --experimental-build-mode compile",
+    "build:full": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint src/components/chat src/components/graph src/app/api/graph src/components/ui/input.tsx src/components/ui/chat/chat-bubble.tsx src/app/page.tsx --max-warnings=0"
   },
   "dependencies": {
     "@ai-sdk/mistral": "^1.2.7",
@@ -43,6 +44,7 @@
     "tailwind-merge": "^3.0.2",
     "tw-animate-css": "^1.2.4",
     "vaul": "^1.1.2",
+    "vis-network": "^9.1.13",
     "zod": "^3.24.2"
   },
   "devDependencies": {

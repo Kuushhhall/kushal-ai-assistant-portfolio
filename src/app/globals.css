@@ -121,6 +121,23 @@
   }
 }
 
+.prose {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+  width: 100%;
+}
+
+.prose code {
+  white-space: pre-wrap;
+}
+
+/* Ensure ScrollArea content gets proper width */
+[data-slot="scroll-area-viewport"] {
+  width: 100% !important;
+}
+
 .custom-scrollbar {
   /* For Firefox */
   scrollbar-width: thin;
